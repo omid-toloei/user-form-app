@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- add Vazirmatn font to html file -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- connect css file to html -->
+    <link rel="stylesheet" href="styles/style.css" />
+    <title>add user data</title>
+  </head>
+  <body>
+    <main>
+      <form class="main-section" autocomplete="off">
+        <h1>دیتا های کاربران</h1>
+        <h3 id="input-error"></h3>
+        <table>
+          <thead>
+            <tr>
+              <th class="th-name">نام</th>
+              <th class="th-family">نام خانوادگی</th>
+              <th class="th-age">سن</th>
+              <th class="th-number">شماره تلفن</th>
+            </tr>
+            <tr class="information-receiver-row">
+              <td><input type="text" autocomplete="off" id="userEnteredName" class="table-input table-input-name" placeholder="Michael"></td>
+              <td><input type="text" autocomplete="off" id="userEnteredFamily" class="table-input table-input-family" placeholder="Johnson"></td>
+              <td><input type="number" autocomplete="off" id="userEnteredAge" class="table-input table-input-age" placeholder="17"></td>
+              <td><input type="number" autocomplete="off" id="userEnteredPhoneNumber" class="table-input table-input-phonenumber" placeholder="09253482658"></td>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <div>
+          <button type="submit" id="addBtn">Add data</button>
+          <button type="button" id="deleteAllUserData">Delete all</button>
+        </div>
+      </form>
+    </main>
+    <script src="javascript/app.js"></script>
+  </body>
+</html>
