@@ -35,13 +35,6 @@ function setUserData() {
   const userAgeData = userEnteredAge.value;
   const userPhoneNumberData = userEnteredPhoneNumber.value;
 
-  function MakeDataObject(name, family, age, phonenumber) {
-    this.name = name;
-    this.family = family;
-    this.age = age;
-    this.phonenumber = phonenumber;
-  }
-
   let makedNewObject;
   
   if(userNameData == "" || userFamilyData == "" || userAgeData == "" || userPhoneNumberData == "") {
@@ -50,6 +43,27 @@ function setUserData() {
   } else {
     makedNewObject = new MakeDataObject(userNameData, userFamilyData, userAgeData, userPhoneNumberData);
   }
+  if(userAgeData < 1) {
+    alert("سن کوچکتر از حد مجاز است!");
+    return;
+  }
+  if(userPhoneNumberData.length < 11 || userPhoneNumberData.length > 11) {
+    alert("تعداد اعداد شماره تلفن باید 11 تا باشد!");
+    return;
+  }
+  if(userAgeData < 1 || userAgeData.length > 3) {
+    alert("سن معتبر نمیباشد");
+    return;
+  }
+  if(userNameData.length > 16) {
+    alert("تعداد کاراکتر های نام بزرگتر از حد مجاز!");
+    return;
+  }
+  if(userFamilyData.length > 12) {
+    alert("تعداد کاراکتر های نام خانوادگی بزرگتر از حد مجاز!");
+    return;
+  }
+
   let allUsersDataArray = JSON.parse(localStorage.getItem("userData")) || [];
   allUsersDataArray.push(makedNewObject);
 
@@ -76,10 +90,28 @@ function showData() {
   }
   
   let newTag = '';
-  listData.forEach((element) => {
-    newTag += `<tr><td>${element.name}</td><td>${element.family}</td><td>${element.age}</td><td>${element.phonenumber}</td></tr>`;
+  listData.forEach((element, index) => {
+    newTag += `<tr>
+    <td>${element.name}</td>
+    <td>${element.family}</td>
+    <td>${element.age}</td>
+    <td>${element.phonenumber}</td>
+    <td><div class="td-actions">
+    <button class="edit-btn" type="button"><img src="../pictures/edit-icon.png"></button>
+    <button class="remove-btn" onclick="deleteThisTd(${index})" type="button"><img src="../pictures/trash-can-icon.png"></button>
+    </div></td></tr>`;
   });
   
   const tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = newTag;
+}
+
+function deleteThisTd(index) {
+  let getLocalStorageData = localStorage.getItem("userData");
+  let parseGetLocalStorageData = JSON.parse(getLocalStorageData);
+
+  parseGetLocalStorageData.splice(index, 1);
+  localStorage.setItem("userData", JSON.stringify(parseGetLocalStorageData));
+  
+  showData();
 }
